@@ -607,7 +607,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 682aa4ef8bebe6241a217fadf554e0b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SpawnPoint: {fileID: 1390754427}
+  _spawnPoints:
+  - {fileID: 1390754427}
+  - {fileID: 1770839669}
+  - {fileID: 1060106937}
+  - {fileID: 533176376}
   _cubePool: {fileID: 793091818}
 --- !u!1 &1060106936
 GameObject:

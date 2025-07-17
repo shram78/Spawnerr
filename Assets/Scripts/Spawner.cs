@@ -7,7 +7,9 @@ using UnityEngine;
 public class Spawner : MonoBehaviour
 {
 
-    [SerializeField] private Transform SpawnPoint;
+    //[SerializeField] private Transform SpawnPoint;
+
+    [SerializeField] private Transform[] _spawnPoints;
     [SerializeField] private CubePool _cubePool;
 
     private List<GameObject> _activeCubes = new List<GameObject>();
@@ -24,6 +26,8 @@ public class Spawner : MonoBehaviour
 
     private void Spawn()
     {
+        Transform SpawnPoint = _spawnPoints[UnityEngine.Random.Range(0, _spawnPoints.Length)];
+
         GameObject cube = _cubePool.TakeCube();
 
         cube.transform.position = SpawnPoint.transform.position;
