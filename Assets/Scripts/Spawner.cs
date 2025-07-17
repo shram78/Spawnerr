@@ -6,22 +6,26 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-
-    //[SerializeField] private Transform SpawnPoint;
-
     [SerializeField] private Transform[] _spawnPoints;
     [SerializeField] private CubePool _cubePool;
+    [SerializeField] private float _spawnInterval;
+    [SerializeField] private float _lifeTime;
 
     private List<GameObject> _activeCubes = new List<GameObject>();
 
+    private float _timer;
+    
+
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        _timer += Time.deltaTime;     
+
+        if (_timer >= _spawnInterval)
+        {
             Spawn();
 
-        if (Input.GetKeyDown(KeyCode.Q))
-            ReturnCube();
-
+            _timer = 0;
+        }
     }
 
     private void Spawn()
@@ -34,6 +38,8 @@ public class Spawner : MonoBehaviour
         cube.transform.rotation = Quaternion.identity;
 
         _activeCubes.Add(cube);
+
+        StartCoroutine(DisableByTimer());
     }
 
     private void ReturnCube()
@@ -46,5 +52,14 @@ public class Spawner : MonoBehaviour
         _cubePool.ReturnCube(cube);
 
         _activeCubes.RemoveAt(lastCube);
+    }
+
+    private IEnumerator DisableByTimer()
+    {
+        yield return new WaitForSeconds(_lifeTime);
+
+        ReturnCube();
+
+        StopAllCoroutines();
     }
 }

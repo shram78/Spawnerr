@@ -470,7 +470,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7df7c9af9944d0940bd268600244ceb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CubePrefab: {fileID: 2414170185978089269, guid: 5847fe99677e8e146b1d3f6ab69ac80e, type: 3}
+  _cubePrefab: {fileID: 2414170185978089269, guid: 5847fe99677e8e146b1d3f6ab69ac80e, type: 3}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -613,6 +613,7 @@ MonoBehaviour:
   - {fileID: 1060106937}
   - {fileID: 533176376}
   _cubePool: {fileID: 793091818}
+  _spawnInterval: 1
 --- !u!1 &1060106936
 GameObject:
   m_ObjectHideFlags: 0
