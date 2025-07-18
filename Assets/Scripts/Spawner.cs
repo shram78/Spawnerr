@@ -14,7 +14,7 @@ public class Spawner : MonoBehaviour
     private readonly List<GameObject> _activeCubes = new List<GameObject>();
 
     private float _timer;
-    
+
 
     void Update()
     {
@@ -30,11 +30,11 @@ public class Spawner : MonoBehaviour
 
     private void Spawn()
     {
-        Transform SpawnPoint = _spawnPoints[UnityEngine.Random.Range(0, _spawnPoints.Length)];
+        Transform spawnPoint = _spawnPoints[UnityEngine.Random.Range(0, _spawnPoints.Length)];
 
         GameObject cube = _cubePool.TakeCube();
 
-        cube.transform.position = SpawnPoint.transform.position;
+        cube.transform.position = spawnPoint.transform.position;
         cube.transform.rotation = Quaternion.identity;
 
         _activeCubes.Add(cube);
@@ -60,6 +60,6 @@ public class Spawner : MonoBehaviour
 
         ReturnCube();
 
-        StopAllCoroutines();
+        StopCoroutine(DisableByTimer());
     }
 }
