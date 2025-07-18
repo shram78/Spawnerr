@@ -1,20 +1,22 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class CubePool : MonoBehaviour
 {
 
     [SerializeField] private GameObject _cubePrefab;
-    [SerializeField] private GameObject _placeForSpawnedObj;
+    [SerializeField] private GameObject _placeForSpawnedObj; // for spawn prefab in sep folder
 
-    private int _poolSize = 10;
-    private Queue<GameObject> _pool = new Queue<GameObject>();
+    private int _size = 10;
+    private readonly Queue<GameObject> _pool = new Queue<GameObject>();
+    private int _spawnedCount = 0; 
+    
+    public event Action<int> OnSpawnedCountChanged;
 
     void Start()
     {
-        for (int i = 0; i < _poolSize; i++)
+        for (int i = 0; i < _size; i++)
         {
             GameObject cube = Instantiate(_cubePrefab);
             cube.gameObject.SetActive(false);
@@ -30,6 +32,10 @@ public class CubePool : MonoBehaviour
         {
             GameObject cube = _pool.Dequeue();
             cube.SetActive(true);
+            
+            _spawnedCount++;
+            
+            UpdateSpawnedCount();
 
             return cube;
         }
@@ -45,5 +51,11 @@ public class CubePool : MonoBehaviour
     {
         cube.SetActive(false);
         _pool.Enqueue(cube);
+    }
+
+    public void UpdateSpawnedCount()
+    {
+        OnSpawnedCountChanged?.Invoke(_spawnedCount);
+        Debug.Log(_spawnedCount);
     }
 }
