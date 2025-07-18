@@ -11,7 +11,7 @@ public class Spawner : MonoBehaviour
     [SerializeField] private float _spawnInterval;
     [SerializeField] private float _lifeTime;
 
-    private List<GameObject> _activeCubes = new List<GameObject>();
+    private readonly List<GameObject> _activeCubes = new List<GameObject>();
 
     private float _timer;
     
