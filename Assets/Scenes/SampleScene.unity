@@ -614,6 +614,7 @@ MonoBehaviour:
   - {fileID: 533176376}
   _cubePool: {fileID: 793091818}
   _spawnInterval: 1
+  _lifeTime: 0.9
 --- !u!1 &1060106936
 GameObject:
   m_ObjectHideFlags: 0
