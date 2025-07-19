@@ -1,7 +1,5 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Spawner : MonoBehaviour
@@ -14,8 +12,7 @@ public class Spawner : MonoBehaviour
     private readonly List<GameObject> _activeCubes = new List<GameObject>();
 
     private float _timer;
-
-
+    
     void Update()
     {
         _timer += Time.deltaTime;     

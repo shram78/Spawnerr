@@ -11,6 +11,7 @@ public class CubePool : MonoBehaviour
     private int _size = 10;
     private readonly Queue<GameObject> _pool = new Queue<GameObject>();
     private int _spawnedCount = 0; 
+    private int _totalSpawned = 0;
     
     public event Action<int> OnSpawnedCountChanged;
 
@@ -56,6 +57,5 @@ public class CubePool : MonoBehaviour
     public void UpdateSpawnedCount()
     {
         OnSpawnedCountChanged?.Invoke(_spawnedCount);
-        Debug.Log(_spawnedCount);
     }
 }
