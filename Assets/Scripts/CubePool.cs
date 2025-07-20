@@ -8,10 +8,9 @@ public class CubePool : MonoBehaviour
     [SerializeField] private GameObject _cubePrefab;
     [SerializeField] private GameObject _placeForSpawnedObj; // for spawn prefab in sep folder
 
-    private int _size = 10;
+    private readonly int _size = 10;
     private readonly Queue<GameObject> _pool = new Queue<GameObject>();
     private int _spawnedCount = 0; 
-    private int _totalSpawned = 0;
     
     public event Action<int> OnSpawnedCountChanged;
 
@@ -19,11 +18,9 @@ public class CubePool : MonoBehaviour
     {
         for (int i = 0; i < _size; i++)
         {
-            GameObject cube = Instantiate(_cubePrefab);
+            GameObject cube = Instantiate(_cubePrefab, _placeForSpawnedObj.transform);
             cube.gameObject.SetActive(false);
             _pool.Enqueue(cube);
-
-            cube.transform.parent = _placeForSpawnedObj.transform;
         }
     }
 
@@ -42,7 +39,7 @@ public class CubePool : MonoBehaviour
         }
         else
         {
-            GameObject cube = Instantiate(_cubePrefab);
+            GameObject cube = Instantiate(_cubePrefab, _placeForSpawnedObj.transform);
 
             return cube;
         }
@@ -54,7 +51,7 @@ public class CubePool : MonoBehaviour
         _pool.Enqueue(cube);
     }
 
-    public void UpdateSpawnedCount()
+    private void UpdateSpawnedCount()
     {
         OnSpawnedCountChanged?.Invoke(_spawnedCount);
     }
