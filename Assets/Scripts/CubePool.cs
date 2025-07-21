@@ -4,17 +4,16 @@ using UnityEngine;
 
 public class CubePool : MonoBehaviour
 {
-
     [SerializeField] private GameObject _cubePrefab;
     [SerializeField] private GameObject _placeForSpawnedObj; // for spawn prefab in sep folder
 
     private readonly int _size = 10;
     private readonly Queue<GameObject> _pool = new Queue<GameObject>();
-    private int _spawnedCount = 0; 
-    
+    private int _spawnedCount = 0;
+
     public event Action<int> OnSpawnedCountChanged;
 
-    void Start()
+    private void Start()
     {
         for (int i = 0; i < _size; i++)
         {
@@ -30,9 +29,9 @@ public class CubePool : MonoBehaviour
         {
             GameObject cube = _pool.Dequeue();
             cube.SetActive(true);
-            
+
             _spawnedCount++;
-            
+
             UpdateSpawnedCount();
 
             return cube;

@@ -13,7 +13,7 @@ public class Spawner : MonoBehaviour
 
     private float _timer;
     
-    void Update()
+    private void Update()
     {
         _timer += Time.deltaTime;     
 
@@ -27,7 +27,7 @@ public class Spawner : MonoBehaviour
 
     private void Spawn()
     {
-        Transform spawnPoint = _spawnPoints[UnityEngine.Random.Range(0, _spawnPoints.Length)];
+        Transform spawnPoint = _spawnPoints[Random.Range(0, _spawnPoints.Length)];
 
         GameObject cube = _cubePool.TakeCube();
 
