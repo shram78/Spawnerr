@@ -8,6 +8,6 @@ public class ScoreView : MonoBehaviour
 
    public void Display(int score)
    {
-      _text.text = $"Score: {score}";
+      _text.text = $"Score new: {score}";
    }
 }
