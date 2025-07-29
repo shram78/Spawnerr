@@ -7,7 +7,7 @@ public class CubePool : MonoBehaviour
     [SerializeField] private GameObject _cubePrefab;
     [SerializeField] private GameObject _placeForSpawnedObj; // for spawn prefab in sep folder
 
-    private readonly int _size = 10;
+    private readonly int _size = 7;
     private readonly Queue<GameObject> _pool = new Queue<GameObject>();
     private int _spawnedCount = 0;
 
