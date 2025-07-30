@@ -17,6 +17,11 @@ public class BulletController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.gameObject.name);
+        if (other.gameObject.TryGetComponent<IDamagable>(out var damagable))
+        {
+            damagable.TakeDamage(true);
+            Destroy(gameObject);
+        }
+        
     }
 }

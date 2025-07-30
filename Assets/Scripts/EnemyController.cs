@@ -1,16 +1,11 @@
 using UnityEngine;
 
-public class EnemyController : MonoBehaviour
+public class EnemyController : MonoBehaviour, IDamagable
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public void TakeDamage(bool isHit)
     {
+        EnemySpawner enemySpawner = FindFirstObjectByType<EnemySpawner>();
         
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        enemySpawner.IdentKilledEnemy(this);
     }
 }

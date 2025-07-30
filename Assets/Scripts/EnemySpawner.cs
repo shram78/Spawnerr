@@ -6,7 +6,7 @@ using Random = UnityEngine.Random;
 public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] private Transform[] _spawnPoints;
-    [FormerlySerializedAs("_cubePool")] [SerializeField] private EnemyPool enemyPool;
+    [SerializeField] private EnemyPool enemyPool;
     [SerializeField] private float _spawnInterval;
 
     private readonly List<GameObject> _activeCubes = new List<GameObject>();
@@ -20,9 +20,6 @@ public class EnemySpawner : MonoBehaviour
     
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
-            TryToKill();
-        
         _timer += Time.deltaTime;
 
         if (_timer >= _spawnInterval)
@@ -42,7 +39,6 @@ public class EnemySpawner : MonoBehaviour
             _isCellBusy[spawnIndex] = true;
         }
     }
-   
 
     private void Spawn(int spawnIndex)
     {
@@ -54,7 +50,7 @@ public class EnemySpawner : MonoBehaviour
 
     }
 
-    private void TryToKill()
+    private void TryToKill(EnemyController controller)
     {
         int  killIndex = Random.Range(0, _spawnPoints.Length);
         if (_isCellBusy[killIndex]  == true)
@@ -74,5 +70,13 @@ public class EnemySpawner : MonoBehaviour
         enemyPool.ReturnEnemy(cube);
 
         _activeCubes.RemoveAt(lastCube);
+    }
+
+    public void IdentKilledEnemy(EnemyController enemyController)
+    {
+        Debug.Log("enemy name " + enemyController);
+        
+        TryToKill(enemyController);
+
     }
 }
