@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float _moveSpeed = 10;
     [SerializeField] private GameObject _bulletPrefab;
+    [SerializeField] private Transform _shootPoint;
     
     private Rigidbody _rb;
     
@@ -29,6 +30,6 @@ public class PlayerController : MonoBehaviour
 
     private void Shoot()
     {
-        Instantiate(_bulletPrefab, transform.position, transform.rotation);
+        Instantiate(_bulletPrefab, _shootPoint.position, Quaternion.identity);
     }
 }

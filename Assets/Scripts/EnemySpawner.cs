@@ -1,11 +1,12 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] private Transform[] _spawnPoints;
-    [SerializeField] private CubePool _cubePool;
+    [FormerlySerializedAs("_cubePool")] [SerializeField] private EnemyPool enemyPool;
     [SerializeField] private float _spawnInterval;
 
     private readonly List<GameObject> _activeCubes = new List<GameObject>();
@@ -45,7 +46,7 @@ public class EnemySpawner : MonoBehaviour
 
     private void Spawn(int spawnIndex)
     {
-        GameObject cube = _cubePool.TakeCube();
+        GameObject cube = enemyPool.TakeEnemy();
 
         cube.transform.position = _spawnPoints[spawnIndex].transform.position;
         
@@ -70,7 +71,7 @@ public class EnemySpawner : MonoBehaviour
         int lastCube = _activeCubes.Count - 1;
 
         GameObject cube = _activeCubes[lastCube];
-        _cubePool.ReturnCube(cube);
+        enemyPool.ReturnEnemy(cube);
 
         _activeCubes.RemoveAt(lastCube);
     }

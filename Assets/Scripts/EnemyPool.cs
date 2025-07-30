@@ -1,10 +1,11 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
-public class CubePool : MonoBehaviour
+public class EnemyPool : MonoBehaviour
 {
-    [SerializeField] private GameObject _cubePrefab;
+    [FormerlySerializedAs("_cubePrefab")] [SerializeField] private GameObject _enemyPrefab;
     [SerializeField] private GameObject _placeForSpawnedObj; // for spawn prefab in sep folder
 
     private readonly int _size = 7;
@@ -17,13 +18,13 @@ public class CubePool : MonoBehaviour
     {
         for (int i = 0; i < _size; i++)
         {
-            GameObject cube = Instantiate(_cubePrefab, _placeForSpawnedObj.transform);
+            GameObject cube = Instantiate(_enemyPrefab, _placeForSpawnedObj.transform);
             cube.gameObject.SetActive(false);
             _pool.Enqueue(cube);
         }
     }
 
-    public GameObject TakeCube()
+    public GameObject TakeEnemy()
     {
         if (_pool.Count > 0)
         {
@@ -38,13 +39,13 @@ public class CubePool : MonoBehaviour
         }
         else
         {
-            GameObject cube = Instantiate(_cubePrefab, _placeForSpawnedObj.transform);
+            GameObject cube = Instantiate(_enemyPrefab, _placeForSpawnedObj.transform);
 
             return cube;
         }
     }
 
-    public void ReturnCube(GameObject cube)
+    public void ReturnEnemy(GameObject cube)
     {
         cube.SetActive(false);
         _pool.Enqueue(cube);

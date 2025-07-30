@@ -1,19 +1,20 @@
 using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class ScoreObserver : MonoBehaviour
 {
     [SerializeField] private ScoreView _scoreView;
-    [SerializeField] private CubePool _cubePool;
+    [FormerlySerializedAs("_cubePool")] [SerializeField] private EnemyPool enemyPool;
 
     private void Start()
     {
-        _cubePool.OnSpawnedCountChanged += _scoreView.Display;
+        enemyPool.OnSpawnedCountChanged += _scoreView.Display;
     }
 
     private void OnDestroy()
     {
-        _cubePool.OnSpawnedCountChanged -= _scoreView.Display;
+        enemyPool.OnSpawnedCountChanged -= _scoreView.Display;
     }
   }

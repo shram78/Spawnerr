@@ -14,4 +14,9 @@ public class BulletController : MonoBehaviour
     {
         transform.Translate(Vector3.forward * _bulletSpeed * Time.deltaTime);
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log(other.gameObject.name);
+    }
 }
