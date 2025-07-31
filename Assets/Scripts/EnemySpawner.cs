@@ -1,15 +1,12 @@
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] private Transform[] _spawnPoints;
-    [SerializeField] private EnemyPool enemyPool;
     [SerializeField] private float _spawnInterval;
+    [SerializeField] private GameObject _enemyPrefab;
 
-    private readonly List<GameObject> _activeCubes = new List<GameObject>();
     private bool[] _isCellBusy;
     private float _timer;
     
@@ -42,41 +39,25 @@ public class EnemySpawner : MonoBehaviour
 
     private void Spawn(int spawnIndex)
     {
-        GameObject cube = enemyPool.TakeEnemy();
-
-        cube.transform.position = _spawnPoints[spawnIndex].transform.position;
-        
-        _activeCubes.Add(cube);
-
+        GameObject enemy = Instantiate(_enemyPrefab, _spawnPoints[spawnIndex].position, _spawnPoints[spawnIndex].rotation);
+        EnemyController enemyController = enemy.GetComponent<EnemyController>();
+        enemyController.IdentIndex(spawnIndex);
     }
 
-    private void TryToKill(EnemyController controller)
+    public void TryToKill(int index)
     {
-        int  killIndex = Random.Range(0, _spawnPoints.Length);
-        if (_isCellBusy[killIndex]  == true)
-        {
-            ReturnCube();
-            _isCellBusy[killIndex] = false;
-        }
+            _isCellBusy[index] = false;
     }
-
-    private void ReturnCube()
+    /*private void ReturnCube()
     {
         if (_activeCubes.Count == 0) return;
 
-        int lastCube = _activeCubes.Count - 1;
+       int lastCube = _activeCubes.Count - 1;
 
-        GameObject cube = _activeCubes[lastCube];
+       GameObject cube = _activeCubes[lastCube];
+        
         enemyPool.ReturnEnemy(cube);
 
         _activeCubes.RemoveAt(lastCube);
-    }
-
-    public void IdentKilledEnemy(EnemyController enemyController)
-    {
-        Debug.Log("enemy name " + enemyController);
-        
-        TryToKill(enemyController);
-
-    }
+  }*/
 }

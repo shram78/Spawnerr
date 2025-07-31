@@ -988,7 +988,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 793091816}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7df7c9af9944d0940bd268600244ceb2, type: 3}
   m_Name: 
@@ -1139,8 +1139,8 @@ MonoBehaviour:
   - {fileID: 1645717232}
   - {fileID: 1988560629}
   - {fileID: 1657044847}
-  enemyPool: {fileID: 793091818}
-  _spawnInterval: 0.3
+  _spawnInterval: 1
+  _enemyPrefab: {fileID: 2414170185978089269, guid: 5847fe99677e8e146b1d3f6ab69ac80e, type: 3}
 --- !u!1 &1060106936
 GameObject:
   m_ObjectHideFlags: 0
