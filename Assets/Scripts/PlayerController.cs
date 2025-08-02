@@ -2,13 +2,14 @@ using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]  
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour,  IDamagable
 {
     [SerializeField] private float _moveSpeed = 10;
     [SerializeField] private GameObject _bulletPrefab;
     [SerializeField] private Transform _shootPoint;
     
     private Rigidbody _rb;
+    
     
     private void Start()
     {
@@ -31,5 +32,10 @@ public class PlayerController : MonoBehaviour
     private void Shoot()
     {
         Instantiate(_bulletPrefab, _shootPoint.position, Quaternion.identity);
+    }
+
+    public void TakeDamage(bool isHit)
+    {
+        Destroy(gameObject);
     }
 }
