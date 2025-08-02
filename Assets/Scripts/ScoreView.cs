@@ -4,10 +4,21 @@ using UnityEngine.Serialization;
 
 public class ScoreView : MonoBehaviour
 {
-   [FormerlySerializedAs("_scoreText")] [SerializeField] private TextMeshProUGUI _text;
+   [SerializeField] private TextMeshProUGUI _PlayerLivesText;
+   [SerializeField] private TextMeshProUGUI _EnemyKilledText;
 
-   public void Display(int score)
+   private void Start()
    {
-      _text.text = $"Enemy alive: {score}";
+      _EnemyKilledText.text = $"Killed : ";
+   }
+
+   public void ShowPlayerLives(int lives)
+   {
+      _PlayerLivesText.text = $"Lives : {lives}";
+   }
+
+   public void ShowEnemyKilled(int  killed)
+   {
+      _EnemyKilledText.text = $"Killed : {killed}";
    }
 }

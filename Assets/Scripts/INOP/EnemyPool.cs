@@ -5,7 +5,7 @@ using UnityEngine.Serialization;
 
 public class EnemyPool : MonoBehaviour
 {
-    [FormerlySerializedAs("_cubePrefab")] [SerializeField] private GameObject _enemyPrefab;
+    [SerializeField] private GameObject _enemyPrefab;
     [SerializeField] private GameObject _placeForSpawnedObj; // for spawn prefab in sep folder
 
     private readonly int _size = 7;

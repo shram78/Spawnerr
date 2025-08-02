@@ -6,15 +6,29 @@ using UnityEngine.Serialization;
 public class ScoreObserver : MonoBehaviour
 {
     [SerializeField] private ScoreView _scoreView;
-    [FormerlySerializedAs("_cubePool")] [SerializeField] private EnemyPool enemyPool;
+    [SerializeField] private PlayerController _playerController;
 
-    private void Start()
+    
+    private int _enemyKilledCount = 0;
+
+    private void OnEnable()
     {
-        enemyPool.OnSpawnedCountChanged += _scoreView.Display;
+        _playerController.OnLivesChanged += ShowPlayerLives;
     }
 
-    private void OnDestroy()
+    private void ShowPlayerLives(int lives)
     {
-        enemyPool.OnSpawnedCountChanged -= _scoreView.Display;
+        _scoreView.ShowPlayerLives(lives);
+    }
+
+    public void EnemyDestroed()
+    {
+        _enemyKilledCount++;
+        _scoreView.ShowEnemyKilled(_enemyKilledCount);
+    }
+
+    private void OnDisable()
+    {
+        _playerController.OnLivesChanged -= ShowPlayerLives;
     }
   }
