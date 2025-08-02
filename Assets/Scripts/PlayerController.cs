@@ -3,7 +3,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]  
 
-public class PlayerController : MonoBehaviour,  IDamagable
+public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float _moveSpeed = 10;
     [SerializeField] private GameObject _bulletPrefab;
@@ -38,7 +38,7 @@ public class PlayerController : MonoBehaviour,  IDamagable
         Instantiate(_bulletPrefab, _shootPoint.position, Quaternion.identity);
     }
 
-    public void TakeDamage(bool isHit)
+    public void TakeDamage()
     {
         _lives--;
         OnLivesChanged?.Invoke(_lives);
