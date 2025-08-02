@@ -1,15 +1,16 @@
-using System;
-using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class ScoreObserver : MonoBehaviour
 {
     [SerializeField] private ScoreView _scoreView;
     [SerializeField] private PlayerController _playerController;
-
     
     private int _enemyKilledCount = 0;
+
+    private void Start()
+    {
+        _scoreView.ShowEnemyKilled(_enemyKilledCount);
+    }
 
     private void OnEnable()
     {

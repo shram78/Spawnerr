@@ -22,6 +22,5 @@ public class BulletController : MonoBehaviour
             damagable.TakeDamage(true);
             Destroy(gameObject);
         }
-        
     }
 }

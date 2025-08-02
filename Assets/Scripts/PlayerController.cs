@@ -42,8 +42,11 @@ public class PlayerController : MonoBehaviour,  IDamagable
     {
         _lives--;
         OnLivesChanged?.Invoke(_lives);
-        
+
         if (_lives <= 0)
-        Destroy(gameObject);
+        {
+            Destroy(gameObject);
+            Time.timeScale = 0;
+        }
     }
 }
