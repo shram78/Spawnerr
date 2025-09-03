@@ -12,6 +12,17 @@ public class EnemyController : MonoBehaviour, IDamagable
     private int _currentSpawnIndex;
     private float _timer;
 
+    private Transform _spawnFolder;
+
+    private void Awake()
+    {
+        GameObject folder = GameObject.Find("SpawnedObjects");
+        if (folder == null)
+            folder = new GameObject("SpawnedObjects");
+
+        _spawnFolder = folder.transform;
+    }
+    
     private void Start()
     {
         SetRandomIntervalToShoot();
@@ -47,7 +58,7 @@ public class EnemyController : MonoBehaviour, IDamagable
 
     private void Shoot()
     {
-        Instantiate(_bulletPrefab, _shootPoint.position, Quaternion.Euler(0f, 180f, 0f));
+        Instantiate(_bulletPrefab, _shootPoint.position, Quaternion.Euler(0f, 180f, 0f), _spawnFolder);
     }
 
     private void SetRandomIntervalToShoot()

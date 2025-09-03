@@ -10,6 +10,17 @@ public class EnemySpawner : MonoBehaviour
     private bool[] _isCellBusy;
     private float _timer;
     
+    private Transform _spawnFolder;
+
+    private void Awake()
+    {
+        GameObject folder = GameObject.Find("SpawnedObjects");
+        if (folder == null)
+            folder = new GameObject("SpawnedObjects");
+
+        _spawnFolder = folder.transform;
+    }
+    
     private void Start()
     {
         _isCellBusy = new bool[_spawnPoints.Length];
@@ -39,7 +50,7 @@ public class EnemySpawner : MonoBehaviour
 
     private void Spawn(int spawnIndex)
     {
-        GameObject enemy = Instantiate(_enemyPrefab, _spawnPoints[spawnIndex].position, _spawnPoints[spawnIndex].rotation);
+        GameObject enemy = Instantiate(_enemyPrefab, _spawnPoints[spawnIndex].position, _spawnPoints[spawnIndex].rotation, _spawnFolder);
         EnemyController enemyController = enemy.GetComponent<EnemyController>();
         enemyController.IdentIndex(spawnIndex);
     }
