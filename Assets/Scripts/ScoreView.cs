@@ -6,12 +6,12 @@ public class ScoreView : MonoBehaviour
    [SerializeField] private TextMeshProUGUI _PlayerLivesText;
    [SerializeField] private TextMeshProUGUI _EnemyKilledText;
 
-   public void ShowPlayerLives(int lives) //needs rename
+   public void SetPlayerLives(int lives) 
    {
       _PlayerLivesText.text = $"Lives : {lives}";
    }
 
-   public void ShowEnemyKilled(int  killed) // needs rename
+   public void SetEnemyKilled(int  killed) 
    {
       _EnemyKilledText.text = $"Killed : {killed}";
    }

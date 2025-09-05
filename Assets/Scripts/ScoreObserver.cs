@@ -9,7 +9,7 @@ public class ScoreObserver : MonoBehaviour
 
     private void Start()
     {
-        _scoreView.ShowEnemyKilled(_enemyKilledCount);
+        _scoreView.SetEnemyKilled(_enemyKilledCount);
     }
 
     private void OnEnable()
@@ -19,13 +19,13 @@ public class ScoreObserver : MonoBehaviour
 
     private void ShowPlayerLives(int lives)
     {
-        _scoreView.ShowPlayerLives(lives);
+        _scoreView.SetPlayerLives(lives);
     }
 
     public void EnemyDestroed()
     {
         _enemyKilledCount++;
-        _scoreView.ShowEnemyKilled(_enemyKilledCount);
+        _scoreView.SetEnemyKilled(_enemyKilledCount);
     }
 
     private void OnDisable()
