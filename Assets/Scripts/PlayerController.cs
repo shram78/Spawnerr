@@ -49,4 +49,9 @@ public class PlayerController : MonoBehaviour
             Time.timeScale = 0;
         }
     }
+
+    public void GetFireButtonTutorial()
+    {
+        Shoot();
+    }
 }
