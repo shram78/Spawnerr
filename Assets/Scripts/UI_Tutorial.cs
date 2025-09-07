@@ -15,4 +15,10 @@ public class UI_Tutorial : MonoBehaviour
    {
       _playerController.GetFireButtonTutorial();
    }
+
+   private void OnDestroy()
+   {
+      if (_fireButton != null)
+         _fireButton.onClick.RemoveAllListeners();
+   }
 }
