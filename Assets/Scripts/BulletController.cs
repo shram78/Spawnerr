@@ -5,6 +5,8 @@ public class BulletController : MonoBehaviour
     [SerializeField] private float _bulletSpeed = 5;
     [SerializeField] private float _lifeTime = 2;
     
+    private Transform _bulletFolder;
+    
     private void Start()
     {
         Destroy(gameObject, _lifeTime);

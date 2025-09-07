@@ -285,6 +285,7 @@ MonoBehaviour:
   _shootPoint: {fileID: 1684003804}
   _uiTutorial: {fileID: 1064254200}
   _enemySpawner: {fileID: 1334745990}
+  _buletsPrefabFolder: {fileID: 1371953363}
 --- !u!54 &217613501
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1630,6 +1631,37 @@ MonoBehaviour:
   - {fileID: 1657044847}
   _spawnInterval: 1
   _enemyPrefab: {fileID: 2414170185978089269, guid: 5847fe99677e8e146b1d3f6ab69ac80e, type: 3}
+--- !u!1 &1371953362
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1371953363}
+  m_Layer: 0
+  m_Name: BuletPrefabFolder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1371953363
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1371953362}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1387416428
 GameObject:
   m_ObjectHideFlags: 0
@@ -2763,3 +2795,4 @@ SceneRoots:
   - {fileID: 403689373}
   - {fileID: 456892921}
   - {fileID: 1503967470}
+  - {fileID: 1371953363}

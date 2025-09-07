@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Transform _shootPoint;
     [SerializeField] private UI_Tutorial _uiTutorial;
     [SerializeField] private EnemySpawner _enemySpawner;
+    [SerializeField] private Transform _buletsPrefabFolder;
     
     private Rigidbody _rb;
     private int _lives = 3;
@@ -50,7 +51,7 @@ public class PlayerController : MonoBehaviour
     private void Shoot()
     {
         if (this != null)
-        Instantiate(_bulletPrefab, _shootPoint.position, Quaternion.identity);
+        Instantiate(_bulletPrefab, _shootPoint.position, Quaternion.identity, _buletsPrefabFolder);
     }
 
     public void TakeDamage()
