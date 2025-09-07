@@ -9,8 +9,8 @@ public class EnemySpawner : MonoBehaviour
 
     private bool[] _isCellBusy;
     private float _timer;
-    
     private Transform _spawnFolder;
+    private bool _isTutorialComplete = false;
 
     private void Awake()
     {
@@ -30,7 +30,7 @@ public class EnemySpawner : MonoBehaviour
     {
         _timer += Time.deltaTime;
 
-        if (_timer >= _spawnInterval)
+        if (_timer >= _spawnInterval &&  _isTutorialComplete)
         {
             FindSpawnPosition();
             _timer = 0;
@@ -59,16 +59,9 @@ public class EnemySpawner : MonoBehaviour
     {
             _isCellBusy[index] = false;
     }
-    /*private void ReturnCube()
+
+    public void StartSpawn()
     {
-        if (_activeCubes.Count == 0) return;
-
-       int lastCube = _activeCubes.Count - 1;
-
-       GameObject cube = _activeCubes[lastCube];
-        
-        enemyPool.ReturnEnemy(cube);
-
-        _activeCubes.RemoveAt(lastCube);
-  }*/
+        _isTutorialComplete = true;
+    }
 }
