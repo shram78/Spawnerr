@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Transform _buletsPrefabFolder;
     
     private Rigidbody _rb;
-    private int _lives = 3;
+    private int _lives = 5;
     private bool _isPlayerStartedMove = false;
     
     public event Action<int> OnLivesChanged;
