@@ -26,7 +26,7 @@ public class ScoreView : MonoBehaviour
 
    public void SetAliveEnemy(int alive)
    {
-      _enemyAliveText.text = $"Needs to kill to next wave: {alive}";
+      _enemyAliveText.text = $"Enemy on level: {alive}";
    }
 
    public void SetInfoBeforeNewWave(int wave)

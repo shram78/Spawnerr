@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(Rigidbody))]  
 
@@ -11,10 +12,15 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private UI_Tutorial _uiTutorial;
     [SerializeField] private EnemySpawner _enemySpawner;
     [SerializeField] private Transform _buletsPrefabFolder;
+    [SerializeField] private Button _leftButton;
+    [SerializeField] private Button _rightButton;
     
+     
     private Rigidbody _rb;
     private int _lives = 5;
     private bool _isPlayerStartedMove = false;
+    private bool _isMoveLeft = false;
+    private bool _isMoveRight = false;
     
     public event Action<int> OnLivesChanged;
     
@@ -22,7 +28,19 @@ public class PlayerController : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody>();
         OnLivesChanged?.Invoke(_lives);
+        
+        _leftButton.onClick.AddListener(() => { });
+        _rightButton.onClick.AddListener(() => { });
+        
     }
+
+    public void OnPointerDownButton() => _isMoveLeft = true;
+    public void OnPointerUpButton() => _isMoveLeft = false;
+    
+    public void OnPointerDownButtonR() => _isMoveRight = true;
+    public void OnPointerUpButtonR() => _isMoveRight = false;
+    
+    
 
     private void Update()
     {
@@ -31,14 +49,30 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow))
         {
-            _isPlayerStartedMove = true;
-         
-            _uiTutorial.HiddenButton();
-            
-            _enemySpawner.StartSpawn();
+           FinishTutorial();
+        }
+        
+        if (_isMoveLeft)
+        {
+            transform.Translate(Vector3.left * _moveSpeed * Time.deltaTime);
+            FinishTutorial();
+        }
+        if (_isMoveRight)
+        {
+            transform.Translate(Vector3.right * _moveSpeed * Time.deltaTime);
+            FinishTutorial();
         }
     }
 
+    private void FinishTutorial()
+    {
+        _isPlayerStartedMove = true;
+         
+        _uiTutorial.HiddenButton();
+            
+        _enemySpawner.StartSpawn();
+    }
+    
     private void FixedUpdate()
     {
         if (_isPlayerStartedMove == false) return;
@@ -46,6 +80,8 @@ public class PlayerController : MonoBehaviour
         float inputX = Input.GetAxis("Horizontal");
         Vector3 newVelocity = new Vector3(inputX * _moveSpeed, _rb.linearVelocity.y, _rb.linearVelocity.z);
         _rb.linearVelocity = newVelocity;
+      
+       
     }
 
     private void Shoot()
