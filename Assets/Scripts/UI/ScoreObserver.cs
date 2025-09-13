@@ -11,6 +11,8 @@ public class ScoreObserver : MonoBehaviour
     private void Start()
     {
         _scoreView.SetEnemyKilled(_enemyKilledCount);
+        
+        _scoreView.HideMainUI();
     }
 
     private void OnEnable()
@@ -18,6 +20,13 @@ public class ScoreObserver : MonoBehaviour
         _playerController.OnLivesChanged += ShowPlayerLives;
         _enemySpawner.OnWaveChanged += ShowCurrentWave;
         _enemySpawner.OnEnemyAliveChanged += ShowAliveEnemy;
+    }
+    
+    private void OnDisable()
+    {
+        _playerController.OnLivesChanged -= ShowPlayerLives;
+        _enemySpawner.OnWaveChanged -= ShowCurrentWave;
+        _enemySpawner.OnEnemyAliveChanged -= ShowAliveEnemy;
     }
 
     private void ShowPlayerLives(int lives)
@@ -41,10 +50,19 @@ public class ScoreObserver : MonoBehaviour
         _scoreView.SetAliveEnemy(alive);
     }
 
-    private void OnDisable()
+    public void ShowInfoBeforeNewWave(int wave)
     {
-        _playerController.OnLivesChanged -= ShowPlayerLives;
-        _enemySpawner.OnWaveChanged -= ShowCurrentWave;
-        _enemySpawner.OnEnemyAliveChanged -= ShowAliveEnemy;
+        _scoreView.HideMainUI();
+        
+        _scoreView.HideInfoBeforeNewWave();
+        
+        _scoreView.SetInfoBeforeNewWave(wave);
+    }
+    
+    public void HideInfoBeforeNewWave()
+    {
+        _scoreView.SetMainUI();
+        
+        _scoreView.HideInfoBeforeNewWave();
     }
   }

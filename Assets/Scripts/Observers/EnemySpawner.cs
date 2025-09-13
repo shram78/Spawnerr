@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -7,19 +8,20 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private Transform[] _spawnPoints;
     [SerializeField] private float _spawnInterval;
     [SerializeField] private GameObject _enemyPrefab;
+    [SerializeField] private ScoreObserver _scoreObserver;
 
     private bool[] _isCellBusy;
     private float _timer;
     private Transform _spawnFolder;
     private bool _isTutorialComplete = false;
-
+    private bool _isWaveMessageShowed = false;
     private int _enemyInWaveCount = 0;
     private int _aliveEnemyInWave = 0;
     private int _currentWave = 0;
+    private float _timeToShowInfoWave = 4;
 
     public event Action<int> OnWaveChanged;
     public event Action<int> OnEnemyAliveChanged;
-    
     
     private void Awake()
     {
@@ -39,14 +41,20 @@ public class EnemySpawner : MonoBehaviour
         OnWaveChanged?.Invoke(_currentWave);
         
     }
-    
+
+    private void OnDestroy()
+    {
+         StopCoroutine(TimerBeforeNewWave());
+    }
+
     private void Update()
     {
         _timer += Time.deltaTime;
 
-        if (_timer >= _spawnInterval &&  _isTutorialComplete && _enemyInWaveCount > 0)
+        if (_timer >= _spawnInterval &&  _isTutorialComplete && _enemyInWaveCount > 0 && !_isWaveMessageShowed)
         {
-            FindSpawnPosition();
+            FindSpawnPosition(); 
+            
             _timer = 0;
         }
 
@@ -69,7 +77,10 @@ public class EnemySpawner : MonoBehaviour
 
     private void SetNewWave()
     {
+        StartCoroutine(TimerBeforeNewWave());
+        
         _currentWave++;
+        _scoreObserver.ShowInfoBeforeNewWave(_currentWave);
         
         _enemyInWaveCount = _currentWave * 2;
 
@@ -88,6 +99,15 @@ public class EnemySpawner : MonoBehaviour
         _enemyInWaveCount--;
     }
 
+    IEnumerator TimerBeforeNewWave()
+    {
+        _isWaveMessageShowed = true;
+        
+        yield return new WaitForSeconds(_timeToShowInfoWave);
+        
+        _scoreObserver.HideInfoBeforeNewWave();
+        _isWaveMessageShowed = false;
+    }
 
     public void TryToKill(int index)
     {
