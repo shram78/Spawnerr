@@ -14,8 +14,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Transform _buletsPrefabFolder;
     [SerializeField] private Button _leftButton;
     [SerializeField] private Button _rightButton;
-    [SerializeField] private AudioSource _audioSource;
-    [SerializeField] private AudioClip _shootSound;
     
     private Rigidbody _rb;
     private int _lives = 5;
@@ -84,10 +82,7 @@ public class PlayerController : MonoBehaviour
     private void Shoot()
     {
         if (this != null)
-        {
             Instantiate(_bulletPrefab, _shootPoint.position, Quaternion.identity, _buletsPrefabFolder);
-            _audioSource.PlayOneShot(_shootSound);
-        }
     }
 
     public void TakeDamage()

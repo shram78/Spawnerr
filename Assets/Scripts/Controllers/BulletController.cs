@@ -4,11 +4,15 @@ public class BulletController : MonoBehaviour
 {
     [SerializeField] private float _bulletSpeed = 5;
     [SerializeField] private float _lifeTime = 2;
-    
+    [SerializeField] private AudioSource _audioSource;
+    [SerializeField] private AudioClip _shootSound;
+    [SerializeField] private GameObject _explosionVFX;
     private Transform _bulletFolder;
     
     private void Start()
     {
+       _audioSource.PlayOneShot(_shootSound);
+        
         Destroy(gameObject, _lifeTime);
     }
 
@@ -22,7 +26,9 @@ public class BulletController : MonoBehaviour
         if (other.gameObject.TryGetComponent<IDamagable>(out var damagable))
         {
             damagable.TakeDamage(true);
-            Destroy(gameObject);
+            GameObject vfx = Instantiate(_explosionVFX, transform.position, Quaternion.identity);
+            Destroy(vfx, 1f);
+            Destroy(gameObject, 1);
         }
     }
 }

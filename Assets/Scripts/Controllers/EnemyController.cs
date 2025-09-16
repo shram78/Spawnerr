@@ -5,6 +5,8 @@ public class EnemyController : MonoBehaviour, IDamagable
 {
     [SerializeField] private Transform _shootPoint;
     [SerializeField] private GameObject _bulletPrefab;
+    [SerializeField] private AudioSource _audioSource;
+    [SerializeField] private AudioClip _shootSound;
     
     private float _minIntervalToShoot = 0.2f;
     private float _maxIntervalToShoot = 1.5f;
@@ -48,7 +50,9 @@ public class EnemyController : MonoBehaviour, IDamagable
         ScoreObserver scoreObserver = FindFirstObjectByType<ScoreObserver>();
         scoreObserver.EnemyDestroed();
         
-        Destroy(gameObject);
+       _audioSource.PlayOneShot(_shootSound);
+        
+        Destroy(gameObject, 0.2f);
     }
 
     public void IdentIndex(int identIndex)
