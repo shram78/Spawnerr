@@ -6,12 +6,11 @@ using Random = UnityEngine.Random;
 public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] private Transform[] _spawnPoints;
-    [SerializeField] private float _spawnInterval;
     [SerializeField] private GameObject _enemyPrefab;
     [SerializeField] private ScoreObserver _scoreObserver;
+    [SerializeField] private Timer _timer;
 
     private bool[] _isCellBusy;
-    private float _timer;
     private Transform _spawnFolder;
     private bool _isTutorialComplete = false;
     private bool _isWaveMessageShowed = false;
@@ -42,26 +41,23 @@ public class EnemySpawner : MonoBehaviour
         
     }
 
+    private void OnEnable()
+    {
+        _timer.OnTimerDone += TryToSpawn;
+    }
+
     private void OnDestroy()
     {
          StopCoroutine(TimerBeforeNewWave());
     }
 
-    private void Update()
+    private void TryToSpawn()
     {
-        _timer += Time.deltaTime;
-
-        if (_timer >= _spawnInterval &&  _isTutorialComplete && _enemyInWaveCount > 0 && !_isWaveMessageShowed)
-        {
+        if (_isTutorialComplete && _enemyInWaveCount > 0 && !_isWaveMessageShowed)
             FindSpawnPosition(); 
-            
-            _timer = 0;
-        }
 
         if (_aliveEnemyInWave == 0)
-        {
             SetNewWave();
-        }
     }
 
     private void FindSpawnPosition()
@@ -120,5 +116,10 @@ public class EnemySpawner : MonoBehaviour
     public void StartSpawn()
     {
         _isTutorialComplete = true;
+    }
+    
+    private void OnDisable()
+    {
+        _timer.OnTimerDone -= TryToSpawn;
     }
 }

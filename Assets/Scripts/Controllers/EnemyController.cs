@@ -30,7 +30,7 @@ public class EnemyController : MonoBehaviour, IDamagable
 
     private void Update()
     {
-        _timer += Time.deltaTime;
+        _timer += Time.deltaTime; // Как мне что-то передать из таймера СЮДА?, это же префаб которого нет на сцене. Я не могу подписаться на собыьте из таймера
 
         if (_timer >= _currentIntervaltoShoot)
         {

@@ -14,8 +14,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Transform _buletsPrefabFolder;
     [SerializeField] private Button _leftButton;
     [SerializeField] private Button _rightButton;
+    [SerializeField] private AudioSource _audioSource;
+    [SerializeField] private AudioClip _shootSound;
     
-     
     private Rigidbody _rb;
     private int _lives = 5;
     private bool _isPlayerStartedMove = false;
@@ -31,7 +32,6 @@ public class PlayerController : MonoBehaviour
         
         _leftButton.onClick.AddListener(() => { });
         _rightButton.onClick.AddListener(() => { });
-        
     }
 
     public void OnPointerDownButton() => _isMoveLeft = true;
@@ -39,7 +39,6 @@ public class PlayerController : MonoBehaviour
     
     public void OnPointerDownButtonR() => _isMoveRight = true;
     public void OnPointerUpButtonR() => _isMoveRight = false;
-    
     
 
     private void Update()
@@ -80,14 +79,15 @@ public class PlayerController : MonoBehaviour
         float inputX = Input.GetAxis("Horizontal");
         Vector3 newVelocity = new Vector3(inputX * _moveSpeed, _rb.linearVelocity.y, _rb.linearVelocity.z);
         _rb.linearVelocity = newVelocity;
-      
-       
     }
 
     private void Shoot()
     {
         if (this != null)
-        Instantiate(_bulletPrefab, _shootPoint.position, Quaternion.identity, _buletsPrefabFolder);
+        {
+            Instantiate(_bulletPrefab, _shootPoint.position, Quaternion.identity, _buletsPrefabFolder);
+            _audioSource.PlayOneShot(_shootSound);
+        }
     }
 
     public void TakeDamage()
