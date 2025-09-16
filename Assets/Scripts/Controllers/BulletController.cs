@@ -27,7 +27,7 @@ public class BulletController : MonoBehaviour
         {
             damagable.TakeDamage(true);
             GameObject vfx = Instantiate(_explosionVFX, transform.position, Quaternion.identity);
-            Destroy(vfx, 1f);
+            Destroy(vfx, 0.5f);
             Destroy(gameObject, 1);
         }
     }

@@ -1,4 +1,5 @@
 using System;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,6 +15,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Transform _buletsPrefabFolder;
     [SerializeField] private Button _leftButton;
     [SerializeField] private Button _rightButton;
+    [SerializeField] private CameraShake _cameraShake;
     
     private Rigidbody _rb;
     private int _lives = 5;
@@ -88,6 +90,7 @@ public class PlayerController : MonoBehaviour
     public void TakeDamage()
     {
         _lives--;
+        _cameraShake.Shake();
         OnLivesChanged?.Invoke(_lives);
 
         if (_lives <= 0)
